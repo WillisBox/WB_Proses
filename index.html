@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WB Proses - Kartu Kerja 334</title>
+<meta name="theme-color" content="#111418">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="WB Proses">
+<style>
+  html,body{margin:0;height:100%;background:#111418;overflow:hidden;font-family:system-ui,sans-serif}
+  iframe{position:fixed;inset:0;width:100%;height:100%;border:0}
+  #muat{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  #muat b{color:#F5A524;font-size:20px;letter-spacing:.04em}
+  #muat i{color:#A7B0BC;font-size:13px}
+  #pasang{display:none;position:fixed;left:16px;right:16px;bottom:90px;z-index:9;padding:14px 0;border:0;border-radius:12px;
+          background:#F5A524;color:#2A1A00;font-weight:800;font-size:16px}
+</style>
+</head>
+<body>
+<div id="muat"><img src="logo.png" alt="WB Proses" style="width:120px;border-radius:16px;background:#fff;padding:8px"><b>WILLIS BOX</b><i>Memuat kartu kerja...</i></div>
+<iframe id="form" title="Kartu Kerja 334"
+  src="https://script.google.com/macros/s/AKfycbzlcBCuaRKGevs4-ZvQuskFXLOmgG-3RQz7tqyCDzDsFHY7l1azcZhnot57lEzeH3yPIQ/exec"
+  onload="document.getElementById('muat').style.display='none'"></iframe>
+<button id="pasang">INSTAL APLIKASI WB PROSES</button>
+<script>
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  // Tombol instal muncul bila Chrome menawarkan pemasangan
+  let tawaran = null;
+  const btn = document.getElementById('pasang');
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); tawaran = e; btn.style.display = 'block'; });
+  btn.onclick = async () => { if (!tawaran) return; tawaran.prompt(); await tawaran.userChoice; tawaran = null; btn.style.display = 'none'; };
+  window.addEventListener('appinstalled', () => { btn.style.display = 'none'; });
+</script>
+</body>
+</html>
